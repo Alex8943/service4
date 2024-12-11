@@ -1,23 +1,14 @@
 import amqp from "amqplib";
 import logger from "./winstonLogger";
 import { Channel, Connection } from "amqplib";
+import dotenv from "dotenv";
+
+dotenv.config();
+const RABBITMQ_URL = process.env.RABBITMQ_URL || "amqp://127.0.0.1";
 
 let connection: amqp.Connection | null = null;
 let channel: amqp.Channel | null = null;
 
-const RABBITMQ_URL = process.env.RABBITMQ_URL || "amqp://127.0.0.1";
-
-/*export const connectRabbitMQ = async () => {
-    try {
-        connection = await amqp.connect(RABBITMQ_URL);
-        channel = await connection.createChannel();
-        console.log(`RabbitMQ connection and channel ${channel} created successfully.`);
-    } catch (error) {
-        logger.error("Failed to connect to RabbitMQ:", error);
-        throw error;
-    }
-};
-*/
 
 export async function createChannel(): Promise<{ channel: Channel; connection: Connection }> {
     if (!connection) {
