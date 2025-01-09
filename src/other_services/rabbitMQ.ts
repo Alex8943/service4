@@ -4,7 +4,9 @@ import { Channel, Connection } from "amqplib";
 import dotenv from "dotenv";
 
 dotenv.config();
-const RABBITMQ_URL = process.env.RABBITMQ_URL || "amqp://127.0.0.1";
+const RABBITMQ_URL = process.env.rabbitmq_url || "amqp://127.0.0.1";
+
+console.log("RabbitMQ URL:", RABBITMQ_URL);
 
 let connection: amqp.Connection | null = null;
 let channel: amqp.Channel | null = null;
